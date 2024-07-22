@@ -1,0 +1,29 @@
+.slider-track {
+  width: 600px;
+  height: 15px;
+  border: var(--elements-border) var(--highlight-color) solid;
+  outline: var(--elements-border) var(--shadow-color) solid;
+  box-shadow: inset 0px 0px 0px 1px var(--shadow-color);
+  border-radius: var(--elements-radius);
+
+  
+  background-image: 
+  linear-gradient(90deg, var(--line-color-1) 1.5px, transparent 1.5px),
+  linear-gradient(90deg, var(--line-color-2) 1px, transparent 1px);
+  background-size: 100px 100px, 10px 10px;
+  background-position: -1.5px -1.5px, -1.5px -1.5px, -1px -1px, -1px -1px;
+}
+.slider-handle {
+  height: 15px;
+  box-shadow: inset 0px 0px 0px 1px var(--shadow-color);
+  background-image: 
+  linear-gradient(var(--accent-color-1) 3px, var(--highlight-color) 4px, var(--line-color-2) 5px, var(--accent-color-2) 10px);
+  background-size: 1px 15px;
+}
+
+.slider-value {
+  font-weight: bold;
+  margin: auto;
+  width: 50%;
+  text-align: center;
+}

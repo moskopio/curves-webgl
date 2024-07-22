@@ -1,0 +1,35 @@
+:root {
+  --highlight-color: #FFF;
+  --shadow-color: #000;
+  --bg-color: #2A2c33;
+  --line-color-1: #666;
+  --line-color-2: #333;
+  --accent-color-1: #B2C99E;
+  --accent-color-2: #628090;
+  
+  --elements-border: 2px;
+  --elements-radius: 3px;
+}
+
+body {
+  background: var(--bg-color);
+}
+
+.canvas-display {
+  width: 600px;
+  height: 400px;
+  
+  border: var(--elements-border) var(--highlight-color) solid;
+  outline: var(--elements-border) var(--shadow-color) solid;
+  border-radius: var(--elements-radius);
+  
+  margin-bottom: 5px;
+  
+  background-color: var(--bg-color);
+  background-image: linear-gradient(var(--line-color-1) 1.5px, transparent 1.5px),
+  linear-gradient(90deg, var(--line-color-1) 1.5px, transparent 1.5px),
+  linear-gradient(var(--line-color-2) 1px, transparent 1px),
+  linear-gradient(90deg, var(--line-color-2) 1px, transparent 1px);
+  background-position: -1.5px -1.5px, -1.5px -1.5px, -1px -1px, -1px -1px;
+  background-size: 100px 100px, 100px 100px, 10px 10px, 10px 10px;
+}
