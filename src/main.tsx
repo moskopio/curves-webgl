@@ -1,11 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { Slider } from './controls/Slider'
 import './main.css'
+import { App } from './App'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <div className="canvas-display" />
-    <Slider onChange={() => null} value={100} min={0} max={100} />
+    <App />
   </React.StrictMode>
 )

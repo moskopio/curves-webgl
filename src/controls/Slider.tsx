@@ -39,6 +39,7 @@ export function Slider(props: Props): ReactElement {
     onMouseDown={handleClick}
     onMouseUp={handleDragEnd}
     onMouseMove={handleDrag}
+    onMouseLeave={handleDragEnd}
   >
     <div className="slider-handle" style={{ width: `${getPercentage(currentValue)}%` }} />
   </div>
