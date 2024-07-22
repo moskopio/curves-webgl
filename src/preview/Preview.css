@@ -1,5 +1,5 @@
 
-.svg-overlay {
+.svg-preview {
 	display: block;
 	position: fixed;
 	top:  10px;
@@ -8,28 +8,28 @@
 	height: 400px;
 }
 
-.svg-overlay path {
+.svg-preview path {
 	stroke: var(--accent-color-1);
 	stroke-width: 5px;
 	stroke-dasharray: 5, 20;
 	fill: none;
 }
 
-.svg-overlay line {
+.svg-preview line {
 	stroke: var(--accent-color-2);
-	stroke-width: 2px;
+	stroke-width: 3px;
 	stroke-dasharray: 2, 20;
 }
 
-.svg-overlay circle {
+.svg-preview circle {
 	fill: var(--accent-color-2);
 	stroke: var(--highlight-color);
 	stroke-width: 2px;
-	r: 5px;
+	r: 10px;
 }
 
-.svg-overlay circle:hover {
+.svg-preview circle:hover {
 	fill: var(--accent-color-1);
-	cursor: hand;
 	stroke-width: 3px;
+	r: 20px;
 }

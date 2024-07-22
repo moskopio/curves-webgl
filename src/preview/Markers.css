@@ -1,0 +1,20 @@
+.svg-marker {
+	display: block;
+	position: fixed;
+	top:  10px;
+	left: 10px;
+	width:  600px;
+	height: 400px;
+}
+
+
+.svg-marker circle {
+	fill: var(--accent-color-2);
+	stroke: var(--highlight-color);
+	stroke-width: 2px;
+	r: 10px;
+}
+
+.svg-marker circle:hover {
+	fill: var(--accent-color-1);
+}
