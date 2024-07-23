@@ -9,10 +9,11 @@ import catmullVertex from './catmull.vert'
 
 interface Props {
   points: Points
+  steps:  number
 }
 
 export function WebGLPreview(props: Props): ReactElement {
-  const { points } = props
+  const { points, steps } = props
   
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [bezierDrawer, setBezierDrawer] = useState<LineDrawer | undefined>(undefined)
@@ -39,11 +40,15 @@ export function WebGLPreview(props: Props): ReactElement {
   
   useEffect(() => { 
     gl?.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
+    
     bezierDrawer?.updatePoints(points)
+    bezierDrawer?.updateSteps(steps)
     bezierDrawer?.draw()
+    
     catmullDrawer?.updatePoints(points)
+    catmullDrawer?.updateSteps(steps)
     catmullDrawer?.draw()
-  }, [points, bezierDrawer])
+  }, [points, steps, bezierDrawer])
   
   return (
     <canvas ref={canvasRef} className="webgl-canvas" width={600} height={400} />

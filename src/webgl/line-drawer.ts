@@ -6,6 +6,7 @@ export interface LineDrawer {
   draw:         () => void
   setViewPort:  (w: number, h: number) => void
   updatePoints: (points: Points) => void
+  updateSteps:  (steps: number) => void
 }
 
 interface Parameters {
@@ -31,21 +32,30 @@ export function createLineDrawer(parameters: Parameters): LineDrawer | undefined
   const p3 = gl.getUniformLocation(program, 'p3')
   
   // Attribute
-  const vertPos = gl.getAttribLocation(program, 't')
-  
-  // Initialize the attribute buffer
-  const steps = 100;
-  var tv = [];
-  for ( var i = 0; i<steps; ++i ) {
-      tv.push(i / (steps-1))
-  }
-  
+  const vertT = gl.getAttribLocation(program, 't')
+    
   // Create the vertex buffer object
   const buffer = gl.createBuffer()
-	gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
-	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(tv), gl.STATIC_DRAW)
   
-  return { setViewPort, updatePoints, draw }
+  // update parts
+  let stepsCount = 100
+  updateSteps(100)
+
+  
+  return { updateSteps, setViewPort, updatePoints, draw }
+  
+  function updateSteps(steps: number): void {
+    stepsCount = steps;
+    
+    const stepsArray = []
+    for ( var i = 0; i<steps; ++i ) {
+      stepsArray.push(i / (steps - 1))
+  }
+  
+  gl.useProgram(program!)
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(stepsArray), gl.STATIC_DRAW)
+  }
 
   function setViewPort(w: number, h: number): void {
     var transformationMatrix = [ 
@@ -69,8 +79,8 @@ export function createLineDrawer(parameters: Parameters): LineDrawer | undefined
   function draw(): void { 
     gl.useProgram(program!)
 		gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
-		gl.vertexAttribPointer(vertPos, 1, gl.FLOAT, false, 0, 0 )
-		gl.enableVertexAttribArray(vertPos )
-		gl.drawArrays(gl.LINE_STRIP, 0, steps)
+		gl.vertexAttribPointer(vertT, 1, gl.FLOAT, false, 0, 0 )
+		gl.enableVertexAttribArray(vertT )
+		gl.drawArrays(gl.LINE_STRIP, 0, stepsCount)
   }
 }

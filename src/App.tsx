@@ -15,13 +15,13 @@ const DEFAULT_POINTS: Points = {
 
 export function App(): ReactNode {
   const [points, updatePoints] = useState(DEFAULT_POINTS)
+  const [steps, updateSteps] = useState(100)
   
-
   return (
   <div>
-    <WebGLPreview points={points} />
+    <WebGLPreview points={points} steps={steps} />
     <SVGPreview points={points} />
     <Markers points={points} onChange={updatePoints} />
-    <Slider onChange={() => null} value={100} min={0} max={100} />
+    <Slider onChange={updateSteps} value={steps} min={5} max={100} />
   </div>)
 }

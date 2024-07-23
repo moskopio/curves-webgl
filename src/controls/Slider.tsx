@@ -11,7 +11,6 @@ interface Props {
 export function Slider(props: Props): ReactElement {
   const { onChange, value = 0, min = 0, max = 100 } = props
   
-  const [currentValue, setCurrentValue] = useState(value)
   const [isDragged, setIsDragged] = useState(false)
   
   const getPercentage = useCallback((v: number) => ((v - min) / (max - min)) * 100, [min, max])
@@ -21,8 +20,8 @@ export function Slider(props: Props): ReactElement {
     const {left, width } = event?.currentTarget.getBoundingClientRect()
     const percentage = (event.clientX - left) / width
     const newValue = Math.round(min + percentage * (max - min))
-    setCurrentValue(newValue)
-  }, [setCurrentValue, min, max])
+    onChange(newValue)
+  }, [onChange, min, max])
   
   const handleDrag = useCallback((event: MouseEvent<HTMLDivElement>) => {
     isDragged && updateValue(event)
@@ -41,7 +40,7 @@ export function Slider(props: Props): ReactElement {
     onMouseMove={handleDrag}
     onMouseLeave={handleDragEnd}
   >
-    <div className="slider-handle" style={{ width: `${getPercentage(currentValue)}%` }} />
+    <div className="slider-handle" style={{ width: `${getPercentage(value)}%` }} />
   </div>
   )
 }
