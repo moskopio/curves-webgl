@@ -22,6 +22,6 @@ export function App(): ReactNode {
     <WebGLPreview points={points} steps={steps} />
     <SVGPreview points={points} />
     <Markers points={points} onChange={updatePoints} />
-    <Slider onChange={updateSteps} value={steps} min={5} max={100} />
+    <Slider onChange={updateSteps} value={steps} min={1} max={100} />
   </div>)
 }

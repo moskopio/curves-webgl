@@ -24,37 +24,31 @@ export function createLineDrawer(parameters: Parameters): LineDrawer | undefined
     return undefined
   }
   
-  // Uniforms
   const mvp = gl.getUniformLocation(program, 'mvp')
   const p0 = gl.getUniformLocation(program, 'p0')
   const p1 = gl.getUniformLocation(program, 'p1')
   const p2 = gl.getUniformLocation(program, 'p2')
   const p3 = gl.getUniformLocation(program, 'p3')
   
-  // Attribute
-  const vertT = gl.getAttribLocation(program, 't')
-    
-  // Create the vertex buffer object
-  const buffer = gl.createBuffer()
+  const vertSteps = gl.getAttribLocation(program, 't')
   
-  // update parts
+  const buffer = gl.createBuffer()
   let stepsCount = 100
   updateSteps(100)
 
-  
   return { updateSteps, setViewPort, updatePoints, draw }
   
   function updateSteps(steps: number): void {
     stepsCount = steps;
     
     const stepsArray = []
-    for ( var i = 0; i<steps; ++i ) {
+    for (let i = 0; i<steps; ++i ) {
       stepsArray.push(i / (steps - 1))
-  }
+    }
   
-  gl.useProgram(program!)
-  gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(stepsArray), gl.STATIC_DRAW)
+    gl.useProgram(program!)
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(stepsArray), gl.STATIC_DRAW)
   }
 
   function setViewPort(w: number, h: number): void {
@@ -79,8 +73,8 @@ export function createLineDrawer(parameters: Parameters): LineDrawer | undefined
   function draw(): void { 
     gl.useProgram(program!)
 		gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
-		gl.vertexAttribPointer(vertT, 1, gl.FLOAT, false, 0, 0 )
-		gl.enableVertexAttribArray(vertT )
+		gl.vertexAttribPointer(vertSteps, 1, gl.FLOAT, false, 0, 0 )
+		gl.enableVertexAttribArray(vertSteps )
 		gl.drawArrays(gl.LINE_STRIP, 0, stepsCount)
   }
 }
