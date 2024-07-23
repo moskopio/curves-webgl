@@ -1,11 +1,15 @@
 import { MouseEvent, ReactElement, useCallback, useState } from "react"
 import { Point, PointIndex, Points } from "../types"
-import './Markers.css'
+import './SVGMarkers.css'
+
 
 interface Props {
   points:   Points
   onChange: (points: Points) => void
 }
+
+// Necessary to center points
+const POSITION_CORRECTION = 12
 
 export function Markers(props: Props): ReactElement {
   const { points, onChange } = props
@@ -21,9 +25,9 @@ export function Markers(props: Props): ReactElement {
   
   const handleDrag = useCallback((event: MouseEvent) => {
     if (selectedMarker) {
-      const x = event?.clientX
-      const y = event?.clientY
-      onPointChange(selectedMarker, [x,y])
+      const x = event?.clientX - POSITION_CORRECTION
+      const y = event?.clientY - POSITION_CORRECTION
+      onPointChange(selectedMarker, [x, y])
     }
   }, [selectedMarker, onPointChange])
   const handleDragEnd = useCallback(() => selectMarker(null), [selectMarker])
@@ -39,8 +43,8 @@ export function Markers(props: Props): ReactElement {
 }
 
 interface MarkerProps {
-  id:     PointIndex
-  point:  [number, number]
+  id:           PointIndex
+  point:        [number, number]
   selectMarker: (id: PointIndex | null) => void
 }
 
@@ -49,10 +53,10 @@ function Marker(props: MarkerProps): ReactElement {
   const handleDragStart = useCallback(() => selectMarker(id), [selectMarker])
 
   return (
-      <circle id={id} 
-        onMouseDown={handleDragStart} 
-        cx={point[0]} 
-        cy={point[1]} 
+      <circle
+        onMouseDown={handleDragStart}
+        cx={point[0]}
+        cy={point[1]}
       />
   )
 }

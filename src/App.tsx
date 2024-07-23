@@ -1,8 +1,9 @@
 import { ReactNode, useState } from "react";
 import { Slider } from "./controls/Slider";
-import { Preview } from "./preview/Preview";
+import { SVGPreview } from "./svg/SVGPreview";
 import { Points } from "./types";
-import { Markers } from "./preview/Markers";
+import { Markers } from "./svg/SVGMarkers";
+import { WebGLPreview } from "./webgl/WebGLPreview";
 
 
 const DEFAULT_POINTS: Points = {
@@ -18,8 +19,8 @@ export function App(): ReactNode {
 
   return (
   <div>
-    <canvas className="canvas-display" />
-    <Preview points={points} />
+    <WebGLPreview points={points} />
+    <SVGPreview points={points} />
     <Markers points={points} onChange={updatePoints} />
     <Slider onChange={() => null} value={100} min={0} max={100} />
   </div>)

@@ -1,12 +1,12 @@
-import { ReactElement } from "react";
-import { Points } from "../types";
-import './Preview.css';
+import { ReactElement } from "react"
+import { Points } from "../types"
+import './SVGPreview.css'
 
 interface Props {
   points: Points
 }
 
-export function Preview(props: Props): ReactElement {  
+export function SVGPreview(props: Props): ReactElement {  
   const { points } = props
   
   return (

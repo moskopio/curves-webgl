@@ -20,16 +20,3 @@
 	stroke-width: 3px;
 	stroke-dasharray: 2, 20;
 }
-
-.svg-preview circle {
-	fill: var(--accent-color-2);
-	stroke: var(--highlight-color);
-	stroke-width: 2px;
-	r: 10px;
-}
-
-.svg-preview circle:hover {
-	fill: var(--accent-color-1);
-	stroke-width: 3px;
-	r: 20px;
-}

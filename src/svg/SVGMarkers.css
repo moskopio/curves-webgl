@@ -3,7 +3,7 @@
 	position: fixed;
 	top:  10px;
 	left: 10px;
-	width:  600px;
+	width: 600px;
 	height: 400px;
 }
 
@@ -12,9 +12,11 @@
 	fill: var(--accent-color-2);
 	stroke: var(--highlight-color);
 	stroke-width: 2px;
-	r: 10px;
+	r: 8px;
 }
 
 .svg-marker circle:hover {
 	fill: var(--accent-color-1);
+	stroke-width: 2px;
+	r: 10px;
 }
