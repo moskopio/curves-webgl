@@ -9,7 +9,8 @@
 
 
 .svg-marker circle {
-	fill: var(--accent-color-2);
+	/* fill: var(--accent-color-2); */
+	fill: transparent;
 	stroke: var(--highlight-color);
 	stroke-width: 2px;
 	r: 8px;

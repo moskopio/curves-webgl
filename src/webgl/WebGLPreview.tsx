@@ -1,7 +1,11 @@
 import { ReactElement, useEffect, useRef, useState } from "react"
 import { Points } from "../types"
 import './WebGLPreview.css'
-import { createBezierDrawer, LineDraw } from "./bezier"
+import { createLineDrawer, LineDrawer } from "./line-drawer"
+import bezierFragment from './bezier.frag'
+import bezierVertex from './bezier.vert'
+import catmullFragment from './catmull.frag'
+import catmullVertex from './catmull.vert'
 
 interface Props {
   points: Points
@@ -11,17 +15,23 @@ export function WebGLPreview(props: Props): ReactElement {
   const { points } = props
   
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [bezierDrawer, setBezierDrawer] = useState<LineDraw | null>(null)
-  const [gl, setGL] = useState<WebGLRenderingContext | null>(null)
+  const [bezierDrawer, setBezierDrawer] = useState<LineDrawer | undefined>(undefined)
+  const [catmullDrawer, setCatmullDrawer] = useState<LineDrawer | undefined>(undefined)
+  const [gl, setGL] = useState<WebGLRenderingContext | undefined>(undefined)
   
   useEffect(() => {
     const canvas = canvasRef.current;
     if (canvas) {
       const gl = canvas.getContext("webgl", {antialias: false, depth: false})
       if (gl) {
-        const bezier = createBezierDrawer(gl)
-        bezier.setViewPort(600, 400)
+        
+        const bezier = createLineDrawer({ gl, vertexSource: bezierVertex, fragmentSource: bezierFragment} )
+        const catmull = createLineDrawer({ gl, vertexSource: catmullVertex, fragmentSource: catmullFragment} )
+        
+        catmull?.setViewPort(600, 400)
+        bezier?.setViewPort(600, 400)
         setBezierDrawer(bezier)
+        setCatmullDrawer(catmull)
         setGL(gl)
       }
     }
@@ -31,6 +41,8 @@ export function WebGLPreview(props: Props): ReactElement {
     gl?.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
     bezierDrawer?.updatePoints(points)
     bezierDrawer?.draw()
+    catmullDrawer?.updatePoints(points)
+    catmullDrawer?.draw()
   }, [points, bezierDrawer])
   
   return (
