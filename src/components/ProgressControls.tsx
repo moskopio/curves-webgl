@@ -8,7 +8,7 @@ export function ProgressControls(): ReactElement {
   
   return (
     <Slider 
-      label='Progress' 
+      label={`Progress ${Math.floor(progress * 100)}%`}
       max={1} 
       min={0} 
       onChange={updateProgress} 

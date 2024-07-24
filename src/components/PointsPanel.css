@@ -26,21 +26,29 @@
 }
 
 .point-preview-label {
-  flex: 4;
+  flex: 2;
   font-weight: bold;
-  font-size: 11px;
-  -webkit-text-stroke: 0.2px black;
+  font-size: 12px;
   color: var(--highlight-color);
   font-family: monospace;
   user-select: none;
+  text-shadow:
+  1px 1px 0 #000,
+  -1px 1px 0 #000,
+  -1px -1px 0 #000,
+  1px -1px 0 #000;
 }
 
 .point-preview-coordinate {
   flex: 1;
-  font-size: 11px;
+  font-size: 12px;
   text-align: right;
-  -webkit-text-stroke: 0.2px black;
   color: var(--highlight-color);
   font-family: monospace;
   user-select: none;
+  text-shadow:
+  1px 1px 0 #000,
+  -1px 1px 0 #000,
+  -1px -1px 0 #000,
+  1px -1px 0 #000;
 }

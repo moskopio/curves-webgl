@@ -29,8 +29,8 @@ function PointPreview(props: Props): ReactElement {
   return (
     <div className="point-preview"> 
       <div className="point-preview-label">{id}: </div>
-      <div className="point-preview-coordinate">{point[0]}</div>
-      <div className="point-preview-coordinate">{point[1]}</div>
+      <div className="point-preview-coordinate">[{point[0]},</div>
+      <div className="point-preview-coordinate">{point[1]}]</div>
     </div>
   )
 }
