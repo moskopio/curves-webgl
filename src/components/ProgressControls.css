@@ -1,0 +1,6 @@
+.progress-background {
+  background-image: 
+    linear-gradient(90deg, var(--line-color-1) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, var(--line-color-2) 1px, transparent 1px);
+  background-size: 100px 100px, 10px 10px;
+}

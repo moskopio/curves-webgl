@@ -20,12 +20,12 @@ export function Slider(props: Props): ReactElement {
   const getPercentage = useCallback((v: number) => ((v - min) / (max - min)) * 100, [min, max])
   
   const updateValue = useCallback((event: MouseEvent<HTMLDivElement>) => {
-    const {left, width } = event?.currentTarget.getBoundingClientRect()
+    const boundingRect = event.currentTarget.getBoundingClientRect()
     
-    const mouseX = Math.floor(event.clientX)
     // Fixing precision problems
-    const boundingLeft = Math.floor(left)
-    const boundingWidth = Math.floor(width)
+    const mouseX = Math.floor(event.clientX)
+    const boundingLeft = Math.floor(boundingRect.left)
+    const boundingWidth = Math.floor(boundingRect.width)
     
     const percentage = (mouseX - boundingLeft) / boundingWidth
     onChange(min + percentage * (max - min))
@@ -38,7 +38,6 @@ export function Slider(props: Props): ReactElement {
   const handleDragEnd = useCallback(() => setIsDragged(false), [setIsDragged])
   
   const handleClick = useCallback((event: MouseEvent<HTMLDivElement>) => {
-    console.log(event)
     setIsDragged(true)
     updateValue(event)
   }, [setIsDragged, updateValue])
