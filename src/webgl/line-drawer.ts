@@ -3,10 +3,10 @@ import { createShaderProgram } from "./program"
 
 
 export interface LineDrawer {
-  draw:         () => void
-  setViewPort:  (w: number, h: number) => void
-  updatePoints: (points: Points) => void
-  updateSteps:  (steps: number) => void
+  draw:           () => void
+  setViewPort:    (w: number, h: number) => void
+  updatePoints:   (points: Points) => void
+  updateSteps:    (steps: number, progress: number) => void
 }
 
 interface Parameters {
@@ -34,22 +34,23 @@ export function createLineDrawer(parameters: Parameters): LineDrawer | undefined
   
   const buffer = gl.createBuffer()
   let stepsCount = 100
-  updateSteps(100)
+  updateSteps(100, 100)
 
   return { updateSteps, setViewPort, updatePoints, draw }
   
-  function updateSteps(steps: number): void {
+  function updateSteps(steps: number, progress: number): void {
     stepsCount = steps;
     
     const stepsArray = []
-    for (let i = 0; i<steps; ++i ) {
-      stepsArray.push(i / (steps - 1))
+    for (let i = 0; i<steps; ++i) {
+      stepsArray.push(i * progress / (steps - 1))
     }
-  
+    
     gl.useProgram(program!)
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(stepsArray), gl.STATIC_DRAW)
   }
+  
 
   function setViewPort(w: number, h: number): void {
     var transformationMatrix = [ 

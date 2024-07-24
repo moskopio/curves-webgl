@@ -1,4 +1,4 @@
-import { MouseEvent, ReactElement, useCallback, useState } from "react"
+import { Fragment, MouseEvent, ReactElement, useCallback, useState } from "react"
 import { Point, PointIndex, Points } from "../types"
 import './SVGMarkers.css'
 
@@ -53,10 +53,9 @@ function Marker(props: MarkerProps): ReactElement {
   const handleDragStart = useCallback(() => selectMarker(id), [selectMarker])
 
   return (
-      <circle
-        onMouseDown={handleDragStart}
-        cx={point[0]}
-        cy={point[1]}
-      />
+    <Fragment>
+      <circle onMouseDown={handleDragStart} cx={point[0]} cy={point[1]} />
+      <text x={point[0] - 4} y={point[1] + 3}>{id}</text>
+    </Fragment>
   )
 }

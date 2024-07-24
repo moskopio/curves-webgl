@@ -21,3 +21,12 @@
 	stroke-width: 2px;
 	r: 10px;
 }
+
+.svg-marker text {
+	font-size: 8px;
+	fill: var(--highlight-color);
+	pointer-events: none;
+  user-select: none;
+	font-family: monospace;
+}
+
