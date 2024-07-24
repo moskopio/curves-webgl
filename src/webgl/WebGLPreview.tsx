@@ -1,9 +1,8 @@
 import { ReactElement, useContext, useEffect, useRef, useState } from "react"
 import { SettingsContext, StateContext } from "../state"
 import './WebGLPreview.css'
-import bezierFragment from './bezier.frag'
+import lineFragment from './line.frag'
 import bezierVertex from './bezier.vert'
-import catmullFragment from './catmull.frag'
 import catmullVertex from './catmull.vert'
 import { createLineDrawer, LineDrawer } from "./line-drawer"
 
@@ -24,8 +23,8 @@ export function WebGLPreview(): ReactElement {
     if (canvas) {
       const gl = canvas.getContext("webgl", {antialias: false, depth: false})
       if (gl) {
-        const bezier = createLineDrawer({ gl, vertexSource: bezierVertex, fragmentSource: bezierFragment} )
-        const catmull = createLineDrawer({ gl, vertexSource: catmullVertex, fragmentSource: catmullFragment} )
+        const bezier = createLineDrawer({ gl, vertexSource: bezierVertex, fragmentSource: lineFragment, color: 0xFF0000 } )
+        const catmull = createLineDrawer({ gl, vertexSource: catmullVertex, fragmentSource: lineFragment, color: 0x00FF00 } )
         
         catmull?.setViewPort(600, 400)
         bezier?.setViewPort(600, 400)
