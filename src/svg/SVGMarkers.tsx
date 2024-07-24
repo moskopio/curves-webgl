@@ -1,27 +1,28 @@
-import { Fragment, MouseEvent, ReactElement, useCallback, useState } from "react"
-import { Point, PointIndex, Points } from "../types"
+import { Fragment, MouseEvent, ReactElement, useCallback, useContext, useState } from "react"
+import { SettingsContext, StateContext } from "../state"
+import { Point, PointIndex } from "../types"
 import './SVGMarkers.css'
 
 
-interface Props {
-  points:   Points
-  onChange: (points: Points) => void
-}
 
 // Necessary to center points
 const POSITION_CORRECTION = 12
 
-export function Markers(props: Props): ReactElement {
-  const { points, onChange } = props
+export function Markers(): ReactElement {
+  const state = useContext(StateContext)
+  const { points, updatePoints } = state
   const { p0, p1, p2, p3 } = points
+  
+  const settings = useContext(SettingsContext)
+  const { markersEnabled } = settings
   
   const [selectedMarker, selectMarker] = useState<PointIndex | null>(null)
   
   const onPointChange = useCallback((id: PointIndex, point: Point) => {
     const newPoints = {...points}
     newPoints[id] = point
-    onChange(newPoints)
-  }, [points, onChange])
+    updatePoints(newPoints)
+  }, [points, updatePoints])
   
   const handleDrag = useCallback((event: MouseEvent) => {
     if (selectedMarker) {
@@ -32,14 +33,15 @@ export function Markers(props: Props): ReactElement {
   }, [selectedMarker, onPointChange])
   const handleDragEnd = useCallback(() => selectMarker(null), [selectMarker])
   
-  return (
+  return markersEnabled 
+  ? (
     <svg className="svg-marker" onMouseMove={handleDrag} onMouseUp={handleDragEnd}>
     <Marker id="p0" point={p0} selectMarker={selectMarker} />
     <Marker id="p1" point={p1} selectMarker={selectMarker} />
     <Marker id="p2" point={p2} selectMarker={selectMarker} />
     <Marker id="p3" point={p3} selectMarker={selectMarker} />
   </svg>
-  )
+  ) : <div /> 
 }
 
 interface MarkerProps {

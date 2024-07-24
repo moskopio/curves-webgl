@@ -1,18 +1,17 @@
-import { ReactElement, useCallback, useState } from "react";
+import { ReactElement, useCallback } from "react"
 import './Checkbox.css'
 
 interface Props {
   label:     string
-  onChange: (value: number) => void
+  onChange: (value: boolean) => void
   value:     boolean
 }
 
 export function Checkbox(props: Props): ReactElement {
-  const { label, onChange } = props
+  const { value, label, onChange } = props
   
-  const [value, setValue] = useState(false)  
   const classes = `checkbox-box ${value && 'checked'}`
-  const onClick = useCallback(() => setValue(!value), [value, setValue])
+  const onClick = useCallback(() => onChange(!value), [value, onChange])
     
   return (
   <div className="checkbox" onClick={onClick} > 

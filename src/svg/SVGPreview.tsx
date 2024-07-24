@@ -1,19 +1,21 @@
-import { ReactElement } from "react"
+import { ReactElement, useContext } from "react"
 import { Points } from "../types"
 import './SVGPreview.css'
+import { SettingsContext, StateContext } from "../state"
 
-interface Props {
-  points: Points
-}
 
-export function SVGPreview(props: Props): ReactElement {  
-  const { points } = props
+export function SVGPreview(): ReactElement {  
+  const state = useContext(StateContext)
+  const settings = useContext(SettingsContext)
+  
+  const { points } = state
+  const { svgEnabled } = settings
   
   return (
     <div>
     <svg className="svg-preview">
-      <Curve {...points} />
-      <Lines {...points} />
+      { svgEnabled && <Curve {...points} /> }
+      { svgEnabled && <Lines {...points} /> }
    </svg>
    </div>
   )

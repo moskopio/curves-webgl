@@ -1,20 +1,18 @@
-import { ReactElement, useEffect, useRef, useState } from "react"
-import { Points } from "../types"
+import { ReactElement, useContext, useEffect, useRef, useState } from "react"
+import { SettingsContext, StateContext } from "../state"
 import './WebGLPreview.css'
-import { createLineDrawer, LineDrawer } from "./line-drawer"
 import bezierFragment from './bezier.frag'
 import bezierVertex from './bezier.vert'
 import catmullFragment from './catmull.frag'
 import catmullVertex from './catmull.vert'
+import { createLineDrawer, LineDrawer } from "./line-drawer"
 
-interface Props {
-  points:   Points
-  steps:    number
-  progress: number
-}
-
-export function WebGLPreview(props: Props): ReactElement {
-  const { points, steps, progress } = props
+export function WebGLPreview(): ReactElement {
+  const state = useContext(StateContext)
+  const settings = useContext(SettingsContext)
+  const { bezierEnabled, catmullEnabled } = settings
+  
+  const { points, steps, progress } = state
   
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [bezierDrawer, setBezierDrawer] = useState<LineDrawer | undefined>(undefined)
@@ -44,12 +42,12 @@ export function WebGLPreview(props: Props): ReactElement {
     
     bezierDrawer?.updatePoints(points)
     bezierDrawer?.updateSteps(steps, progress)
-    bezierDrawer?.draw()
+    bezierEnabled && bezierDrawer?.draw()
     
     catmullDrawer?.updatePoints(points)
     catmullDrawer?.updateSteps(steps, progress)
-    catmullDrawer?.draw()
-  }, [points, steps, progress, bezierDrawer])
+    catmullEnabled && catmullDrawer?.draw()
+  }, [points, steps, progress, bezierDrawer, bezierEnabled, catmullEnabled])
   
   return (
     <canvas ref={canvasRef} className="webgl-canvas" width={600} height={400} />
