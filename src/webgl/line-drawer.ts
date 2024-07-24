@@ -66,7 +66,7 @@ export function createLineDrawer(parameters: Parameters): LineDrawer | undefined
   
 
   function setViewPort(w: number, h: number): void {
-    var transformationMatrix = [ 
+    const transformationMatrix = [ 
        2/w,    0, 0, 0, 
          0, -2/h, 0, 0, 
          0,    0, 1, 0, 

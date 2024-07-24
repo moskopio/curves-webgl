@@ -1,3 +1,5 @@
+/* eslint @typescript-eslint/no-unused-vars: 0 */ 
+
 import { createContext } from "react"
 import { Points } from "./types"
 
@@ -8,42 +10,22 @@ export const DEFAULT_POINTS: Points = {
   p3: [550, 200],
 }
 
-export interface State {
-  points:         Points
-  progress:       number
-  steps:          number
-  updatePoints:   (points: Points) => void
-  updateProgress: (progress: number) => void
-  updateSteps:    (steps: number) => void
-}
-
-export const StateContext = createContext<State>({
+export const StateContext = createContext({
   points:         DEFAULT_POINTS, 
   progress:       0,
   steps:          0,
-  updatePoints:   () => null,
-  updateProgress: () => null,
-  updateSteps:    () => null,
+  updatePoints:   (_: Points) => {},
+  updateProgress: (_: number) => {},
+  updateSteps:    (_: number) => {},
 })
 
-export interface Settings {
-  bezierEnabled:     boolean
-  catmullEnabled:    boolean
-  svgEnabled:        boolean
-  markersEnabled:    boolean
-  setBezierEnabled:  (enabled: boolean) => void
-  setCatmullEnabled: (enabled: boolean) => void
-  setSvgEnabled:     (enabled: boolean) => void
-  setMarkersEnabled: (enabled: boolean) => void
-}
-
-export const SettingsContext = createContext<Settings>({
+export const SettingsContext = createContext({
   bezierEnabled:     true,
   catmullEnabled:    true,
   svgEnabled:        true,
   markersEnabled:    true,
-  setBezierEnabled:  () => null,
-  setCatmullEnabled: () => null,
-  setSvgEnabled:     () => null,
-  setMarkersEnabled: () => null,
+  setBezierEnabled:  (_: boolean) => {},
+  setCatmullEnabled: (_: boolean) => {},
+  setSvgEnabled:     (_: boolean) => {},
+  setMarkersEnabled: (_: boolean) => {},
 })

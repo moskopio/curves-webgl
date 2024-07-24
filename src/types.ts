@@ -1,4 +1,3 @@
-
 export type Point = [number, number]
 
 export interface Points {
@@ -9,4 +8,3 @@ export interface Points {
 }
 
 export type PointIndex = 'p0' | 'p1' | 'p2' | 'p3'
-
