@@ -1,10 +1,9 @@
-.controls-panel {
+.points-panel {
   display: flex;
   flex-direction: column;
   gap: 5px;
   padding: 5px;
-  width: 205px;
-  align-self: baseline;
+  width: 150px;
   border: var(--elements-border) var(--highlight-color) solid;
   outline: var(--elements-border) var(--shadow-color) solid;
   box-shadow: inset 0px 0px 0px 1px var(--shadow-color);
@@ -16,4 +15,32 @@
   linear-gradient(90deg, var(--line-color-3) 1px, transparent 1px);
   background-position: -1px -1px, -1px -1px;
   background-size: 10px 10px, 10px 10px;
+}
+
+
+.point-preview {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  justify-content: space-between;
+}
+
+.point-preview-label {
+  flex: 4;
+  font-weight: bold;
+  font-size: 11px;
+  -webkit-text-stroke: 0.2px black;
+  color: var(--highlight-color);
+  font-family: monospace;
+  user-select: none;
+}
+
+.point-preview-coordinate {
+  flex: 1;
+  font-size: 11px;
+  text-align: right;
+  -webkit-text-stroke: 0.2px black;
+  color: var(--highlight-color);
+  font-family: monospace;
+  user-select: none;
 }

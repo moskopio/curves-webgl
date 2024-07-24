@@ -1,11 +1,12 @@
 import { ReactElement, ReactNode, useMemo, useState } from "react"
 import './App.css'
-import { ControlsPanel } from "./controls/ControlsPanel"
-import { ProgressControls } from "./controls/ProgressControls"
+import { ControlsPanel } from "./components/ControlsPanel"
+import { ProgressControls } from "./components/ProgressControls"
 import { DEFAULT_POINTS, SettingsContext, StateContext } from "./state"
 import { Markers } from "./svg/SVGMarkers"
 import { SVGPreview } from "./svg/SVGPreview"
 import { WebGLPreview } from "./webgl/WebGLPreview"
+import { PointsPanel } from "./components/PointsPanel"
 
 
 export function App(): ReactNode {
@@ -36,7 +37,7 @@ export function App(): ReactNode {
     <SettingsContext.Provider value={settings}>
       <div className="application">
         <Preview />
-        <ControlsPanel />
+        <Panels />
       </div>
     </SettingsContext.Provider>
     </StateContext.Provider>
@@ -50,6 +51,15 @@ function Preview(): ReactElement {
       <SVGPreview />
       <Markers />
       <ProgressControls />
+    </div>
+  )
+}
+
+function Panels(): ReactElement {
+  return (
+    <div className="panels">
+      <ControlsPanel />
+      <PointsPanel />
     </div>
   )
 }

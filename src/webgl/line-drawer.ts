@@ -52,11 +52,11 @@ export function createLineDrawer(parameters: Parameters): LineDrawer | undefined
   }
   
   function updateSteps(steps: number, progress: number): void {
-    stepsCount = steps;
+    stepsCount = Math.floor(steps);
     
     const stepsArray = []
-    for (let i = 0; i<steps; ++i) {
-      stepsArray.push(i * progress / (steps - 1))
+    for (let i = 0; i < stepsCount; ++i) {
+      stepsArray.push(i * progress / (stepsCount - 1))
     }
     
     gl.useProgram(program!)
