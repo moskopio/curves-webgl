@@ -24,7 +24,6 @@ export function WebGLPreview(): ReactElement {
     if (canvas) {
       const gl = canvas.getContext("webgl", {antialias: false, depth: false})
       if (gl) {
-        
         const bezier = createLineDrawer({ gl, vertexSource: bezierVertex, fragmentSource: bezierFragment} )
         const catmull = createLineDrawer({ gl, vertexSource: catmullVertex, fragmentSource: catmullFragment} )
         

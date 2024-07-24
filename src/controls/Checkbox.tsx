@@ -12,11 +12,11 @@ export function Checkbox(props: Props): ReactElement {
   
   const classes = `checkbox-box ${value && 'checked'}`
   const onClick = useCallback(() => onChange(!value), [value, onChange])
-    
+  
   return (
-  <div className="checkbox" onClick={onClick} > 
-    <div className={classes} />
-    <div className="checkbox-label">{label}</div>
-  </div>
+    <div className="checkbox" onClick={onClick} > 
+      <div className={classes} />
+      <div className="checkbox-label">{label}</div>
+    </div>
   )
 }

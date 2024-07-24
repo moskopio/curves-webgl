@@ -1,7 +1,7 @@
 import { ReactElement, ReactNode, useMemo, useState } from "react"
 import './App.css'
 import { ControlsPanel } from "./controls/ControlsPanel"
-import { Progress } from "./controls/Progress"
+import { ProgressControls } from "./controls/ProgressControls"
 import { DEFAULT_POINTS, SettingsContext, StateContext } from "./state"
 import { Markers } from "./svg/SVGMarkers"
 import { SVGPreview } from "./svg/SVGPreview"
@@ -46,10 +46,10 @@ export function App(): ReactNode {
 function Preview(): ReactElement {
   return (
     <div className="preview">
-    <WebGLPreview />
-    <SVGPreview />
-    <Markers />
-    <Progress />
-  </div>
+      <WebGLPreview />
+      <SVGPreview />
+      <Markers />
+      <ProgressControls />
+    </div>
   )
 }

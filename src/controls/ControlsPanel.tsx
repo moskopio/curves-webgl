@@ -1,7 +1,7 @@
 import { ReactElement, useContext } from "react"
 import { SettingsContext, StateContext } from "../state"
 import { Checkbox } from "./Checkbox"
-import "./Panel.css"
+import "./ControlsPanel.css"
 import { Slider } from "./Slider"
 
 export function ControlsPanel(): ReactElement {
@@ -13,12 +13,12 @@ export function ControlsPanel(): ReactElement {
   const { setBezierEnabled, setCatmullEnabled, setSvgEnabled, setMarkersEnabled } = settings
 
   return (
-  <div className="panel" > 
-    <Checkbox label="Bezier Curve" value={bezierEnabled} onChange={setBezierEnabled} />
-    <Checkbox label="Catmull-Rom Curve" value={catmullEnabled} onChange={setCatmullEnabled} />
-    <Checkbox label="SVG Preview" value={svgEnabled} onChange={setSvgEnabled} />
-    <Checkbox label="Markers" value={markersEnabled} onChange={setMarkersEnabled} />
-    <Slider label='Segments' max={50} min={0} onChange={updateSteps} value={steps} width={200} />
-  </div>
+    <div className="controls-panel" > 
+      <Checkbox label="Bezier Curve" value={bezierEnabled} onChange={setBezierEnabled} />
+      <Checkbox label="Catmull-Rom Curve" value={catmullEnabled} onChange={setCatmullEnabled} />
+      <Checkbox label="SVG Preview" value={svgEnabled} onChange={setSvgEnabled} />
+      <Checkbox label="Markers" value={markersEnabled} onChange={setMarkersEnabled} />
+      <Slider label='Segments' max={50} min={0} onChange={updateSteps} value={steps} width={200} />
+    </div>
   )
 }

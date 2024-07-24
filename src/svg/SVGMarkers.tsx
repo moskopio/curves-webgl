@@ -3,8 +3,6 @@ import { SettingsContext, StateContext } from "../state"
 import { Point, PointIndex } from "../types"
 import './SVGMarkers.css'
 
-
-
 // Necessary to center points
 const POSITION_CORRECTION = 12
 
@@ -50,6 +48,10 @@ interface MarkerProps {
   selectMarker: (id: PointIndex | null) => void
 }
 
+
+const LABEL_X_ADJUSTMENT = -4
+const LABEL_Y_ADJUSTMENT = 3
+
 function Marker(props: MarkerProps): ReactElement {
   const { id, point, selectMarker } = props
   const handleDragStart = useCallback(() => selectMarker(id), [selectMarker])
@@ -57,7 +59,7 @@ function Marker(props: MarkerProps): ReactElement {
   return (
     <Fragment>
       <circle onMouseDown={handleDragStart} cx={point[0]} cy={point[1]} />
-      <text x={point[0] - 4} y={point[1] + 3}>{id}</text>
+      <text x={point[0] + LABEL_X_ADJUSTMENT} y={point[1] + LABEL_Y_ADJUSTMENT}>{id}</text>
     </Fragment>
   )
 }

@@ -1,4 +1,4 @@
-.panel {
+.controls-panel {
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -17,10 +17,3 @@
   background-position: -1px -1px, -1px -1px;
   background-size: 10px 10px, 10px 10px;
 }
-
-.panel-label {
-  color: white;
-  font-size: 12px;
-}
-
-
