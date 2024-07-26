@@ -26,8 +26,8 @@ export function Slider(props: Props): ReactElement {
     const mouseX = Math.floor(event.clientX)
     const boundingLeft = Math.floor(boundingRect.left)
     const boundingWidth = Math.floor(boundingRect.width)
-    
     const percentage = (mouseX - boundingLeft) / boundingWidth
+        
     onChange(min + percentage * (max - min))
   }, [onChange, min, max])
   

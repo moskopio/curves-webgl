@@ -22,10 +22,12 @@ export const StateContext = createContext({
 export const SettingsContext = createContext({
   bezierEnabled:     true,
   catmullEnabled:    true,
+  bSplineEnabled:    true,
   svgEnabled:        true,
   markersEnabled:    true,
   setBezierEnabled:  (_: boolean) => {},
   setCatmullEnabled: (_: boolean) => {},
+  setBSplineEnabled: (_: boolean) => {},
   setSvgEnabled:     (_: boolean) => {},
   setMarkersEnabled: (_: boolean) => {},
 })

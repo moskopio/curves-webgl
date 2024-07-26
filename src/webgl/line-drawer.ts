@@ -87,8 +87,8 @@ export function createLineDrawer(parameters: Parameters): LineDrawer | undefined
   function draw(): void { 
     gl.useProgram(program!)
 		gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
-		gl.vertexAttribPointer(aSteps, 1, gl.FLOAT, false, 0, 0 )
-		gl.enableVertexAttribArray(aSteps )
+		gl.vertexAttribPointer(aSteps, 1, gl.FLOAT, false, 0, 0)
+		gl.enableVertexAttribArray(aSteps)
 		gl.drawArrays(gl.LINE_STRIP, 0, stepsCount)
   }
 }

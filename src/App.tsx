@@ -14,8 +14,10 @@ export function App(): ReactNode {
   const [steps, updateSteps] = useState(20)
   const [progress, updateProgress] = useState(1)
   
-  const [bezierEnabled, setBezierEnabled] = useState(true)
+  const [ bezierEnabled,  setBezierEnabled] = useState(true)
   const [catmullEnabled, setCatmullEnabled] = useState(true)
+  const [bSplineEnabled, setBSplineEnabled] = useState(true)
+  
   const [svgEnabled, setSvgEnabled] = useState(true)
   const [markersEnabled, setMarkersEnabled] = useState(true)
   
@@ -28,9 +30,10 @@ export function App(): ReactNode {
   const settings = useMemo(() => ({
     bezierEnabled,  setBezierEnabled,
     catmullEnabled, setCatmullEnabled,
+    bSplineEnabled, setBSplineEnabled,
     svgEnabled,     setSvgEnabled,
     markersEnabled, setMarkersEnabled
-  }), [bezierEnabled, catmullEnabled, svgEnabled, markersEnabled])
+  }), [bezierEnabled, catmullEnabled, bSplineEnabled, svgEnabled, markersEnabled])
   
   return (
     <StateContext.Provider value={state}>
