@@ -14,8 +14,8 @@ vec2 calculateSpline(in vec2 p0, in vec2 p1, in vec2 p2, in vec2 p3, in float t)
   float t2 = pow(t, 2.0);
   float t3 = pow(t, 3.0);
   
-  vec2 part0 = (-1.0 * t3 + 3.0 * t2 - 3.0 * t + 1.0) * p0;
-  vec2 part1 = ( 3.0 * t3 - 6.0 * t2 + 4.0          ) * p1;
+  vec2 part0 = (-t3 + 3.0 * t2 - 3.0 * t + 1.0) * p0;
+  vec2 part1 = (3.0 * t3 - 6.0 * t2 + 4.0) * p1;
   vec2 part2 = (-3.0 * t3 + 3.0 * t2 + 3.0 * t + 1.0) * p2;
   vec2 part3 = t3 * p3;
   
@@ -47,13 +47,17 @@ vec2 calculateCurve(in vec2 p0, in vec2 p1, in vec2 p2, in vec2 p3, in float t) 
 }
 
 void main() {
-  vec2 part1 = calculateCurve(p0, p0, p1, p2, t * 3.0);
-  vec2 part2 = calculateCurve(p0, p1, p2, p3, (t - 0.33) * 3.0);
-  vec2 part3 = calculateCurve(p1, p2, p3, p3, (t - 0.66) * 3.0);
+  vec2 part0 = calculateCurve(p0, p0, p0, p1, t * 5.0);
+  vec2 part1 = calculateCurve(p0, p0, p1, p2, (t - 0.20) * 5.0);
+  vec2 part2 = calculateCurve(p0, p1, p2, p3, (t - 0.40) * 5.0);
+  vec2 part3 = calculateCurve(p1, p2, p3, p3, (t - 0.60) * 5.0);
+  vec2 part4 = calculateCurve(p2, p3, p3, p3, (t - 0.80) * 5.0);
   
-  vec2 pos = part1 * float(t >= 0.0 && t < 0.33) +
-             part2 * float(t >= 0.33 && t <= 0.66) +
-             part3 * float(t > 0.66);
+  vec2 pos = part0 * float(t >= 0.0 && t < 0.20) +
+             part1 * float(t >= 0.20 && t < 0.40) +
+             part2 * float(t >= 0.40 && t < 0.60) +
+             part3 * float(t >= 0.60 && t < 0.80) +
+             part4 * float(t > 0.80);
              
   gl_Position = mvp * vec4(pos, 0,1);
 }
