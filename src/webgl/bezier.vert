@@ -1,5 +1,5 @@
 attribute float t;
-attribute vec2 p;
+attribute float weight;
 
 uniform mat4 mvp;
 uniform vec2 p0;
@@ -7,20 +7,43 @@ uniform vec2 p1;
 uniform vec2 p2;
 uniform vec2 p3;
 
-vec2 calculateSpline(in vec2 p0, in vec2 p1, in vec2 p2, in vec2 p3, in float t) {
+vec2 calculateSpline(in float t) {
   float t2 = pow(t, 2.0);
   float t3 = pow(t, 3.0);
+  float mt = (1.0 - t);
+  float mt2 = pow(mt, 2.0);
+  float mt3 = pow(mt, 3.0);
   
-  vec2 part0 = (1.0 - t) * (1.0 - t) * (1.0 - t) * p0;
-  vec2 part1 = 3.0 * t * (1.0 - t) * (1.0 - t) * p1;
-  vec2 part2 = 3.0 * t2 * (1.0 - t) * p2;
+  vec2 part0 = mt3 * p0;
+  vec2 part1 = 3.0 * t * mt2 * p1;
+  vec2 part2 = 3.0 * t2 * mt * p2;
   vec2 part3 = t3 * p3;
   
   return part0 + part1 + part2 + part3;
 }
 
-void main() {
-  vec2 pos = p + calculateSpline(p0, p1, p2, p3, t);
+vec2 calculateDerivative(in float t) {
+  float t2 = pow(t, 2.0);
+  float mt = (1.0 - t);
+  float mt2 = pow(mt, 2.0);
   
+  vec2 part0 = -3.0 * mt2 * p0;
+  vec2 part1 = 3.0 * (3.0 * t2 - 4.0 * t + 1.0) * p1;
+  vec2 part2 = 3.0 * (2.0 * t - 3.0 * t2) * p2;
+  vec2 part3 = 3.0 * t2 * p3;
+    
+  return part0 + part1 + part2 + part3;
+}
+
+vec2 calculateNormal(in vec2 d) {
+  return normalize(vec2(-d.y, d.x));
+}
+
+void main() {
+  vec2 curve = calculateSpline(t);
+  vec2 derivative = calculateDerivative(t);
+  vec2 normal = calculateNormal(derivative);
+  
+  vec2 pos = curve + normal * weight;
   gl_Position = mvp * vec4(pos, 0, 1);
 }

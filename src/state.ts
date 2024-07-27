@@ -32,9 +32,9 @@ export const StateContext = createContext<AppState>({
 
 export function useAppState(): AppState {
   const [points,   updatePoints]   = useState(DEFAULT_POINTS)
-  const [steps,    updateSteps]    = useState(10)
+  const [steps,    updateSteps]    = useState(25)
   const [progress, updateProgress] = useState(1)
-  const [weight,   updateWeight]   = useState(0)
+  const [weight,   updateWeight]   = useState(5)
   
   return useMemo(() => ({
     points,   updatePoints,
@@ -73,7 +73,7 @@ export const SettingsContext = createContext<SettingsState>({
 export function useSettingsState(): SettingsState {
   const [ bezierEnabled,  setBezierEnabled] = useState(true)
   const [catmullEnabled, setCatmullEnabled] = useState(true)
-  const [bSplineEnabled, setBSplineEnabled] = useState(false)
+  const [bSplineEnabled, setBSplineEnabled] = useState(true)
   
   const [svgEnabled, setSvgEnabled] = useState(false)
   const [markersEnabled, setMarkersEnabled] = useState(true)

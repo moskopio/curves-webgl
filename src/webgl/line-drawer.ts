@@ -32,14 +32,14 @@ export function createLineDrawer(parameters: Parameters): LineDrawer | undefined
   const uP3 = gl.getUniformLocation(program, 'p3')
   const uColor = gl.getUniformLocation(program, 'color')
   
-  const aSteps = gl.getAttribLocation(program, 't')
-  const aPos = gl.getAttribLocation(program, 'p')
+  const aStep = gl.getAttribLocation(program, 't')
+  const aWeight = gl.getAttribLocation(program, 'weight')
   
   const stepBuffer = gl.createBuffer()
   const pBuffer = gl.createBuffer()
   
   let stepsCount = 100
-  updateSteps(100, 100, 0)
+  updateSteps(100, 100, 5)
   updateColor(color)
   
   return { updateSteps, setViewPort, updatePoints, draw }
@@ -57,14 +57,12 @@ export function createLineDrawer(parameters: Parameters): LineDrawer | undefined
     stepsCount = Math.floor(steps);
     
     const stepsArray = []
-    const pArray = []
+    const weightArray = []
     for (let i = 0; i < stepsCount; i++) {
       stepsArray.push(i * progress / (stepsCount - 1))
       stepsArray.push(i * progress / (stepsCount - 1))
-      pArray.push(0)
-      pArray.push(0)
-      pArray.push(weight)
-      pArray.push(weight)
+      weightArray.push(-weight)
+      weightArray.push(weight)
     }
       
     gl.useProgram(program!)
@@ -72,7 +70,7 @@ export function createLineDrawer(parameters: Parameters): LineDrawer | undefined
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(stepsArray), gl.STATIC_DRAW)
     
     gl.bindBuffer(gl.ARRAY_BUFFER, pBuffer)
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(pArray), gl.STATIC_DRAW)
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(weightArray), gl.STATIC_DRAW)
     
   }
   
@@ -100,12 +98,12 @@ export function createLineDrawer(parameters: Parameters): LineDrawer | undefined
     gl.useProgram(program!)
     
 		gl.bindBuffer(gl.ARRAY_BUFFER, stepBuffer)
-		gl.vertexAttribPointer(aSteps, 1, gl.FLOAT, false, 0, 0)
-		gl.enableVertexAttribArray(aSteps)
+		gl.vertexAttribPointer(aStep, 1, gl.FLOAT, false, 0, 0)
+		gl.enableVertexAttribArray(aStep)
     
     gl.bindBuffer(gl.ARRAY_BUFFER, pBuffer)
-		gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0)
-		gl.enableVertexAttribArray(aPos)
+		gl.vertexAttribPointer(aWeight, 1, gl.FLOAT, false, 0, 0)
+		gl.enableVertexAttribArray(aWeight)
     
 		gl.drawArrays(gl.TRIANGLE_STRIP, 0, stepsCount * 2)
   }
