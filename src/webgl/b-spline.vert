@@ -53,11 +53,11 @@ void main() {
   vec2 part3 = calculateCurve(p1, p2, p3, p3, (t - 0.60) * 5.0);
   vec2 part4 = calculateCurve(p2, p3, p3, p3, (t - 0.80) * 5.0);
   
-  vec2 pos = part0 * float(t >= 0.0 && t < 0.20) +
+  vec2 pos = part0 * float(t >= 0.0  && t < 0.20) +
              part1 * float(t >= 0.20 && t < 0.40) +
              part2 * float(t >= 0.40 && t < 0.60) +
              part3 * float(t >= 0.60 && t < 0.80) +
-             part4 * float(t > 0.80);
+             part4 * float(t >= 0.80);
              
   gl_Position = mvp * vec4(pos, 0,1);
 }
