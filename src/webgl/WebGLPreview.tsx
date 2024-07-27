@@ -12,7 +12,7 @@ export function WebGLPreview(): ReactElement {
   const settings = useContext(SettingsContext)
   const { bezierEnabled, catmullEnabled, bSplineEnabled } = settings
   
-  const { points, steps, progress } = state
+  const { points, steps, progress, weight } = state
   
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [bezierDrawer, setBezierDrawer] = useState<LineDrawer | undefined>(undefined)
@@ -45,17 +45,17 @@ export function WebGLPreview(): ReactElement {
     gl?.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
     
     bezierDrawer?.updatePoints(points)
-    bezierDrawer?.updateSteps(steps, progress)
+    bezierDrawer?.updateSteps(steps, progress, weight)
     bezierEnabled && bezierDrawer?.draw()
     
     catmullDrawer?.updatePoints(points)
-    catmullDrawer?.updateSteps(steps, progress)
+    catmullDrawer?.updateSteps(steps, progress, weight)
     catmullEnabled && catmullDrawer?.draw()
     
     bSplineDrawer?.updatePoints(points)
-    bSplineDrawer?.updateSteps(steps, progress)
+    bSplineDrawer?.updateSteps(steps, progress, weight)
     bSplineEnabled && bSplineDrawer?.draw()
-  }, [points, steps, progress, bezierDrawer, bSplineDrawer, catmullDrawer, bezierEnabled, bSplineEnabled, catmullEnabled])
+  }, [points, steps, progress, bezierDrawer, bSplineDrawer, catmullDrawer, bezierEnabled, bSplineEnabled, catmullEnabled, weight])
   
   return (
     <canvas ref={canvasRef} className="webgl-canvas" width={600} height={400} />

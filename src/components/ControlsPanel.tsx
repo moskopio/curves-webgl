@@ -6,7 +6,7 @@ import { Slider } from "./Slider"
 
 export function ControlsPanel(): ReactElement {
   const state = useContext(StateContext)
-  const { steps, updateSteps } = state
+  const { steps, updateSteps, weight, updateWeight } = state
   
   const settings = useContext(SettingsContext)
   const { bezierEnabled, catmullEnabled, bSplineEnabled, svgEnabled, markersEnabled } = settings
@@ -20,6 +20,7 @@ export function ControlsPanel(): ReactElement {
       <Checkbox label="SVG Preview" value={svgEnabled} onChange={setSvgEnabled} />
       <Checkbox label="Markers" value={markersEnabled} onChange={setMarkersEnabled} />
       <Slider label={`Steps ${Math.ceil(steps)}`} max={50} min={0} onChange={updateSteps} value={steps} width={145} />
+      <Slider label={`Weight ${weight.toFixed(2)}`} max={10} min={0} onChange={updateWeight} value={weight} width={145} />
     </div>
   )
 }
