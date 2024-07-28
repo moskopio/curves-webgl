@@ -53,6 +53,6 @@ void main() {
   vec2 pos = part1 * float(t >= 0.0 && t < 0.33) +
              part2 * float(t >= 0.33 && t <= 0.66) +
              part3 * float(t > 0.66);
-      
+  
   gl_Position = mvp * vec4(pos, 0,1);
 }

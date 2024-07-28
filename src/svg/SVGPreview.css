@@ -16,7 +16,7 @@
 }
 
 .svg-preview line {
-	stroke: var(--accent-color-2);
+	stroke: var(--accent-color-1);
 	stroke-width: 2px;
 	stroke-dasharray: 10, 20;
 }

@@ -14,24 +14,9 @@ export function SVGPreview(): ReactElement {
   return (
     <div>
     <svg className="svg-preview">
-      { svgEnabled && <Curve {...points} /> }
       { svgEnabled && <Lines {...points} /> }
    </svg>
    </div>
-  )
-}
-
-function Curve(props: Points): ReactElement { 
-  const { p0, p1, p2, p3 } = props
-  
-  const d = `
-  M${p0[0]}, ${p0[1]} 
-  C${p1[0]}, ${p1[1]}
-   ${p2[0]}, ${p2[1]}
-   ${p3[0]}, ${p3[1]}`
-  
-  return (
-    <path d={d} />
   )
 }
 

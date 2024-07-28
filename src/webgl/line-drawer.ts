@@ -1,24 +1,24 @@
 import { Points } from "../types"
 import { createShaderProgram } from "./program"
+import lineFragment from './line.frag'
 
 
 export interface LineDrawer {
-  draw:           () => void
-  setViewPort:    (w: number, h: number) => void
-  updatePoints:   (points: Points) => void
-  updateSteps:    (steps: number, progress: number, weight: number) => void
+  draw:         () => void
+  setViewPort:  (w: number, h: number) => void
+  updatePoints: (points: Points) => void
+  updateSteps:  (steps: number, progress: number, weight: number) => void
 }
 
 interface Parameters {
-  gl:             WebGLRenderingContext
-  vertexSource:   string
-  fragmentSource: string
-  color:          number
+  gl:         WebGLRenderingContext
+  lineVertex: string
+  color:      number
 }
 
 export function createLineDrawer(parameters: Parameters): LineDrawer | undefined {
-  const { gl, vertexSource, fragmentSource, color } = parameters
-  const program = createShaderProgram(gl, vertexSource, fragmentSource)
+  const { gl, lineVertex: vertexSource, color } = parameters
+  const program = createShaderProgram(gl, vertexSource, lineFragment)
   
   if (!program) {
     console.error('Failed to create a WebGL Program')

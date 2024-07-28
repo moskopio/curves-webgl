@@ -34,7 +34,7 @@ export function useAppState(): AppState {
   const [points,   updatePoints]   = useState(DEFAULT_POINTS)
   const [steps,    updateSteps]    = useState(25)
   const [progress, updateProgress] = useState(1)
-  const [weight,   updateWeight]   = useState(5)
+  const [weight,   updateWeight]   = useState(2)
   
   return useMemo(() => ({
     points,   updatePoints,
@@ -75,7 +75,7 @@ export function useSettingsState(): SettingsState {
   const [catmullEnabled, setCatmullEnabled] = useState(true)
   const [bSplineEnabled, setBSplineEnabled] = useState(true)
   
-  const [svgEnabled, setSvgEnabled] = useState(false)
+  const [svgEnabled, setSvgEnabled] = useState(true)
   const [markersEnabled, setMarkersEnabled] = useState(true)
   
   return useMemo(() => ({
