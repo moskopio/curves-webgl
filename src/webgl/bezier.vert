@@ -16,7 +16,7 @@ vec2 calculateSpline(in float t) {
   
   vec2 part0 = mt3 * p0;
   vec2 part1 = 3.0 * t * mt2 * p1;
-  vec2 part2 = 3.0 * t2 * mt * p2;
+  vec2 part2 = 3.0 * mt * t2 * p2;
   vec2 part3 = t3 * p3;
   
   return part0 + part1 + part2 + part3;
@@ -28,10 +28,10 @@ vec2 calculateDerivative(in float t) {
   float mt2 = pow(mt, 2.0);
   
   vec2 part0 = -3.0 * mt2 * p0;
-  vec2 part1 = 3.0 * (3.0 * t2 - 4.0 * t + 1.0) * p1;
+  vec2 part1 = 3.0 * (1.0 - 4.0 * t + 3.0 * t2) * p1;
   vec2 part2 = 3.0 * (2.0 * t - 3.0 * t2) * p2;
   vec2 part3 = 3.0 * t2 * p3;
-    
+  
   return part0 + part1 + part2 + part3;
 }
 
