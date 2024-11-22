@@ -4,5 +4,6 @@ import glsl from 'vite-plugin-glsl'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base:    "/curves-webgl",
   plugins: [react(), glsl()],
 })

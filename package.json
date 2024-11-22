@@ -1,19 +1,16 @@
 {
   "name": "curves-webgl",
-  "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc && vite build",
-    "lint": "eslint --config eslint.config.js src",
-    "preview": "vite preview"
+    "lint": "eslint --config eslint.config.js src"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "vitest": "^1.6.0",
-    "wgpu-matrix": "^3.0.1"
+    "vitest": "^1.6.0"
   },
   "devDependencies": {
     "@eslint/compat": "^1.0.3",
